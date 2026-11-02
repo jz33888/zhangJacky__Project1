@@ -32,9 +32,9 @@ leaf_height = height * 0.65/(1+(leaf_count-1)*0.65) #65% of the tree will be lea
 
 #create the stacking leafs
 
-for leaf in range(leaf_count):
+for tree_leaf in range(leaf_count):
 
-    cone_width = width * (1 - leaf / leaf_count)
+    cone_width = width * (1 - tree_leaf / leaf_count)
     cone_height = leaf_height
 
     leaves = cmds.polyCone(
@@ -45,7 +45,7 @@ for leaf in range(leaf_count):
     )[0]
 
     # Position each cone
-    y = trunk_height + cone_height / 2 + leaf * cone_height * 0.65
+    y = trunk_height + cone_height / 2 + tree_leaf * cone_height * 0.65
 
     cmds.move(0, y, 0, leaves)
 
