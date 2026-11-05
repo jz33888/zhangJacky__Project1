@@ -62,13 +62,16 @@ for row in range(rows):
 
             tree.append(leaves)
 
-    #Combines the trees into one geometry
-    tree_geo = cmds.polyUnite(
-        tree,
-        name = "tree_{}_{}geo".format(row + 1, column + 1),
+        #Combines the trees into one geometry
+        tree_geo = cmds.polyUnite(
+            tree,
+            name = "tree_{}_{}geo".format(row + 1, column + 1),
+            constructionHistory=False
         )[0]
 
-    forest.append(tree_geo)
+        forest.append(tree_geo)
+
+
 
 #Group em all together
 cmds.group(
