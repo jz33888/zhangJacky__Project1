@@ -59,13 +59,21 @@ for row in range(rows):
 
             tree.append(leaves)
 
-        #group the whole forest
-        cmds.group(
-            tree,
-            name="tree_{}_{}".format(row + 1, column + 1)
+    #Combines the trees into one geometry
+    tree_geo = cmds.polyUnite(
+        tree,
+        name = "tree_{}_{}geo".format(row + 1, column + 1),
         )
 
+    forest.append(tree_geo)
 
+#Group em all together
+cmds.group(
+    forest,
+    name = "forest_GRP"
+)
+
+#Goals:
 #scaling of the trees as a whole object
 #quality of the trees (subdivs up to 20)
 #color of tree leaves
