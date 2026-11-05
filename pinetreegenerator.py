@@ -16,6 +16,9 @@ trunk_width = width * 0.08
 #leaf size
 leaf_height = height * 0.65/(1+(leaf_count-1)*0.65) #65% of the tree will be leaf
 
+#stores trees into "forest"
+forest = []
+
 #make rows and columns
 for row in range(rows):
 
@@ -52,7 +55,7 @@ for row in range(rows):
                 name="tree_leaves"
             )[0]
 
-            #position each cone
+            #position each cone and size
             y = trunk_height + cone_height / 2 + tree_leaf * cone_height * 0.65
 
             cmds.move(x, y, z, leaves)
@@ -63,7 +66,7 @@ for row in range(rows):
     tree_geo = cmds.polyUnite(
         tree,
         name = "tree_{}_{}geo".format(row + 1, column + 1),
-        )
+        )[0]
 
     forest.append(tree_geo)
 
