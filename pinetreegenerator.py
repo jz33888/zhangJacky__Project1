@@ -1,17 +1,19 @@
+
 import maya.cmds as cmds
 
-def create_forest():
+def create_forest(
+    leaf_count=5,
+    height=8,
+    width=5,
+    quality=8,
+    rows=2,
+    columns=2,
+    leaf_color=(0.08, 0.35, 0.05),
+    trunk_color=(0.30, 0.12, 0.04)
+):
 
     #PARAMETERS
-    leaf_count = 5
-    height = 8
-    width = 5
-    quality = 8
-    rows = 2
-    columns = 2
     spacing = width * 2 #change the (2) to adjust the spacing
-    leaf_color = (0.08, 0.35, 0.05)
-    trunk_color = (0.30, 0.12, 0.04)
 
     #creates leaf material
     leaf_material = cmds.shadingNode(
