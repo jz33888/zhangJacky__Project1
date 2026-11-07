@@ -10,7 +10,39 @@ def create_forest():
     rows = 2
     columns = 2
     spacing = width * 2 #change the (2) to adjust the spacing
+    leaf_color = (0.08, 0.35, 0.05)
+    trunk_color = (0.30, 0.12, 0.04)
 
+    #creates leaf material
+    leaf_material = cmds.shadingNode(
+        "lambert", asShader=True, name="leaf_material"
+    )
+
+    leaf_SG = cmds.sets(
+        renderable=True,
+        noSurfaceShader=True,
+        empty=True,
+        name="leaf_SG"
+    )
+
+    cmds.connectAttr(leaf_material + ".outColor", leaf_SG + ".surfaceShader")
+    cmds.setAttr(leaf_material + ".color", *leaf_color, type="double3")
+
+    #creates trunk material
+    trunk_material = cmds.shadingNode(
+        "lambert", asShader=True, name="trunk_material"
+    )
+
+    trunk_SG = cmds.sets(
+        renderable=True,
+        noSurfaceShader=True,
+        empty=True,
+        name="trunk_SG"
+    )
+
+    cmds.connectAttr(trunk_material + ".outColor", trunk_SG + ".surfaceShader")
+    cmds.setAttr(trunk_material + ".color", *trunk_color, type="double3")
+    
     #trunk size
     trunk_height = height * 0.35 #35% of the tree will be leaf
     trunk_width = width * 0.08
@@ -41,6 +73,9 @@ def create_forest():
             #trunk position
             cmds.move(x, trunk_height / 2, z, tree_trunk)
 
+            #assign trunk material
+            cmds.sets(tree_trunk, edit=True, forceElement=trunk_SG)
+
             #store the tree objs
             tree = [tree_trunk]
 
@@ -60,7 +95,11 @@ def create_forest():
                 #position each cone and size
                 y = trunk_height + cone_height / 2 + tree_leaf * cone_height * 0.65
 
+                #leaves position
                 cmds.move(x, y, z, leaves)
+
+                #assign leaves_material
+                cmds.sets(leaves, edit=True, forceElement=leaf_SG)
 
                 tree.append(leaves)
 
