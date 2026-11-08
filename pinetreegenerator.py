@@ -2,8 +2,7 @@
 import maya.cmds as cmds
 
 def create_forest(
-
-    
+        
     leaf_count=5,
     height=8,
     width=5,
