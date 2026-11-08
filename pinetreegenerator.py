@@ -2,6 +2,8 @@
 import maya.cmds as cmds
 
 def create_forest(
+
+    
     leaf_count=5,
     height=8,
     width=5,
@@ -12,7 +14,11 @@ def create_forest(
     trunk_color=(0.30, 0.12, 0.04)
 ):
 
-    #PARAMETERS
+    #clear previous forest
+    if cmds.objExists("forest_GRP"):
+        cmds.delete("forest_GRP")
+
+    #parameters
     spacing = width * 2 #change the (2) to adjust the spacing
 
     #creates leaf material
@@ -50,11 +56,11 @@ def create_forest(
     trunk_width = width * 0.08
 
     #leaf size
-    leaf_height = height * 0.65/(1+(leaf_count-1)*0.65) #65% of the tree will be leaf
+    leaf_height = height * 0.65/(1+(leaf_count-1)*0.65) if leaf_count > 0 else 0 #65% of the tree will be leaf
 
     #stores trees into "forest"
     forest = []
-
+    
     #make rows and columns
     for row in range(rows):
 
@@ -106,11 +112,16 @@ def create_forest(
                 tree.append(leaves)
 
             #Combines the trees into one geometry
-            tree_geo = cmds.polyUnite(
-                tree,
-                name = "tree_{}_{}geo".format(row + 1, column + 1),
-                constructionHistory=False
-            )[0]
+            if len(tree) > 1:
+
+                tree_geo = cmds.polyUnite(
+                    *tree,
+                    name="tree_{}_{}geo".format(row + 1, column + 1),
+                    constructionHistory=False
+                )[0]
+
+            else:
+                tree_geo = tree[0]
 
             forest.append(tree_geo)
 

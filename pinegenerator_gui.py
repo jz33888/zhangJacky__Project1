@@ -31,7 +31,7 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
 
         #leaf count
         self.leaf_count_input = QtWidgets.QSpinBox()
-        self.leaf_count_input.setRange(1, 20)
+        self.leaf_count_input.setRange(0, 20)
         self.leaf_count_input.setValue(5)
 
         #tree height
@@ -85,8 +85,6 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
         self.main_layout.addWidget(self.trunk_color_btn)
 
         self.main_layout.addWidget(self.create_btn)
-        self.main_layout.addWidget(self.output_lbl)
-
         self.setLayout(self.main_layout)
 
     #connects the buttons
