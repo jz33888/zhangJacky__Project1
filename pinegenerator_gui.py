@@ -63,8 +63,6 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
         self.leaf_color_btn = QtWidgets.QPushButton("Choose Leaf Color")
         self.trunk_color_btn = QtWidgets.QPushButton("Choose Trunk Color")
 
-        self.update_color_buttons()
-
         #make the forest! (generate)
         self.create_btn = QtWidgets.QPushButton("Generate Forest")
 
@@ -118,3 +116,22 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
                 color.greenF(),
                 color.blueF()
             )
+
+    #generate forest
+    def generate_forest(self):
+
+        pinetreegenerator.create_forest(
+            leaf_count=self.leaf_count_input.value(),
+            height=self.height_input.value(),
+            width=self.width_input.value(),
+            quality=self.quality_input.value(),
+            rows=self.rows_input.value(),
+            columns=self.columns_input.value(),
+            leaf_color=self.leaf_color,
+            trunk_color=self.trunk_color
+        )
+
+
+#open gui
+win = PineTreeGeneratorWin()
+win.show()
