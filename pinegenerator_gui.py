@@ -84,7 +84,7 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
         self.form_layout.addRow("Tree Quality:", self.quality_input)
         self.form_layout.addRow("Rows:", self.rows_input)
         self.form_layout.addRow("Columns:", self.columns_input)
-        self.form.layout.addRow("Spacing:", self.spacing_input)
+        self.form_layout.addRow("Spacing:", self.spacing_input)
 
         self.main_layout.addLayout(self.form_layout)
 
