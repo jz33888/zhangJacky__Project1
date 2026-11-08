@@ -67,3 +67,54 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
 
         #make the forest! (generate)
         self.create_btn = QtWidgets.QPushButton("Generate Forest")
+
+    #layout
+    def create_layout(self):
+        self.main_layout = QtWidgets.QVBoxLayout()
+        self.form_layout = QtWidgets.QFormLayout()
+
+        #inputs
+        self.form_layout.addRow("Leaf Layers:", self.leaf_count_input)
+        self.form_layout.addRow("Tree Height:", self.height_input)
+        self.form_layout.addRow("Tree Width:", self.width_input)
+        self.form_layout.addRow("Tree Quality:", self.quality_input)
+        self.form_layout.addRow("Rows:", self.rows_input)
+        self.form_layout.addRow("Columns:", self.columns_input)
+
+        self.main_layout.addLayout(self.form_layout)
+
+        self.main_layout.addWidget(self.leaf_color_btn)
+        self.main_layout.addWidget(self.trunk_color_btn)
+
+        self.main_layout.addWidget(self.create_btn)
+        self.main_layout.addWidget(self.output_lbl)
+
+        self.setLayout(self.main_layout)
+
+    #connects the buttons
+    def connect_signals(self):
+
+        self.create_btn.clicked.connect(self.generate_forest)
+        self.leaf_color_btn.clicked.connect(self.choose_leaf_color)
+        self.trunk_color_btn.clicked.connect(self.choose_trunk_color)
+
+    #color buttons
+    def choose_leaf_color(self):
+        color = QtWidgets.QColorDialog.getColor()
+
+        if color.isValid():
+            self.leaf_color = (
+                color.redF(),
+                color.greenF(),
+                color.blueF()
+            )
+
+    def choose_trunk_color(self):
+        color = QtWidgets.QColorDialog.getColor()
+
+        if color.isValid():
+            self.trunk_color = (
+                color.redF(),
+                color.greenF(),
+                color.blueF()
+            )
