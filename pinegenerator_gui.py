@@ -59,12 +59,18 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
         self.columns_input.setRange(1, 20)
         self.columns_input.setValue(2)
 
+        #spacing
+        self.spacing_input = QtWidgets.QDoubleSpinBox()
+        self.spacing_input.setRange(1, 100)
+        self.spacing_input.setValue(10)
+
         #colors
         self.leaf_color_btn = QtWidgets.QPushButton("Choose Leaf Color")
         self.trunk_color_btn = QtWidgets.QPushButton("Choose Trunk Color")
 
         #make the forest! (generate)
         self.create_btn = QtWidgets.QPushButton("Generate Forest")
+
 
     #layout
     def create_layout(self):
@@ -78,6 +84,7 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
         self.form_layout.addRow("Tree Quality:", self.quality_input)
         self.form_layout.addRow("Rows:", self.rows_input)
         self.form_layout.addRow("Columns:", self.columns_input)
+        self.form.layout.addRow("Spacing:", self.spacing_input)
 
         self.main_layout.addLayout(self.form_layout)
 
@@ -125,6 +132,7 @@ class PineTreeGeneratorWin(QtWidgets.QDialog):
             quality=self.quality_input.value(),
             rows=self.rows_input.value(),
             columns=self.columns_input.value(),
+            spacing=self.spacing_input.value(),
             leaf_color=self.leaf_color,
             trunk_color=self.trunk_color
         )

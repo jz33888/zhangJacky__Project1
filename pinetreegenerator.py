@@ -10,6 +10,7 @@ def create_forest(
     quality=8,
     rows=2,
     columns=2,
+    spacing=None,
     leaf_color=(0.08, 0.35, 0.05),
     trunk_color=(0.30, 0.12, 0.04)
 ):
@@ -18,8 +19,8 @@ def create_forest(
     if cmds.objExists("forest_GRP"):
         cmds.delete("forest_GRP")
 
-    #parameters
-    spacing = width * 2 #change the (2) to adjust the spacing
+    if spacing is None:
+        spacing = width * 2
 
     #creates leaf material
     leaf_material = cmds.shadingNode(
